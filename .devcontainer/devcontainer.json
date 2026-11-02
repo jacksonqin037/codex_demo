@@ -1,0 +1,7 @@
+{
+  "name": "Interactive Experiment Lab",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
+  "forwardPorts": [3000],
+  "postCreateCommand": "bash scripts/setup.sh",
+  "portsAttributes": {"3000": {"label": "实验工坊", "onAutoForward": "notify"}}
+}
