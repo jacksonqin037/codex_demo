@@ -1,0 +1,19 @@
+{
+  "name": "aviation-interactive-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Original aviation experiment starter for Codex Cloud",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env scripts/server.mjs",
+    "start": "node --env-file-if-exists=.env scripts/server.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node --env-file-if-exists=.env scripts/server.mjs --dist",
+    "test": "node --test",
+    "check": "node scripts/check.mjs",
+    "verify": "npm run check && npm test && npm run build"
+  }
+}

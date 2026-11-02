@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { normalize, bearingTo, relativeBearing, groundVector, step } from '../src/physics.js';
+const close = (a,b) => assert.ok(Math.abs(a-b)<1e-8, `${a} != ${b}`);
+test('angles wrap across north in both directions',()=>{ assert.equal(normalize(-1),359);assert.equal(normalize(720),0);assert.equal(relativeBearing(350,10),20);assert.equal(relativeBearing(10,350),340); });
+test('bearings use north zero and clockwise east',()=>{ const p={x:0,y:0};for (const [x,y,b] of [[0,1,0],[1,0,90],[0,-1,180],[-1,0,270]]) close(bearingTo(p,{x,y}),b);assert.equal(bearingTo(p,p),null);assert.equal(relativeBearing(90,null),null); });
+test('wind FROM north is a headwind for a northbound aircraft',()=>{const g=groundVector(0,120,0,20);close(g.speed,100);close(g.track,0);});
+test('wind FROM west drifts northbound aircraft eastward',()=>{const g=groundVector(0,120,270,20);close(g.east,20);close(g.north,120);assert.ok(g.track>0&&g.track<90);});
+test('zero ground speed has no defined track',()=>{assert.equal(groundVector(0,20,0,20).track,null);});
+test('speed in knots integrates to NM and preserves inputs',()=>{const s={x:0,y:0,heading:90,tas:120,windFrom:0,windSpeed:0};const next=step(s,30);close(next.x,1);close(next.y,0);assert.equal(s.x,0);});

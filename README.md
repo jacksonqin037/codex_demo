@@ -48,3 +48,14 @@ npm run build
 - `server.mjs`：静态资源、场景生成、可选远程规划代理。
 - `AGENTS.md`：Codex 项目约定与验证命令。
 - `scripts/setup.sh`、`.devcontainer/`、`.github/workflows/`：环境与持续集成。
+
+## 航空仪表与导航实验子项目
+
+面向 luizmonteiro 航空模拟器的原创开发起点位于 [`examples/aviation`](examples/aviation)。包含固定盘 ADF、飞机/台站位置交互、航向与风参数、轨迹和自动测试，使用独立端口 5173。自然语言生成航空实验、VOR/HSI 等为后续开发内容。
+
+```bash
+bash examples/aviation/scripts/setup.sh
+npm --prefix examples/aviation run dev
+```
+
+Codex 云环境请使用航空专用 [配置指南](examples/aviation/docs/CODEX_CLOUD_SETUP.md)，读取该子目录的 [AGENTS.md](examples/aviation/AGENTS.md)。根目录原有实验应用使用 3000 端口。
